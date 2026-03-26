@@ -119,17 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &160974691 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
-  m_PrefabInstance: {fileID: 555748094}
+--- !u!1 &51561230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51561232}
+  - component: {fileID: 51561231}
+  m_Layer: 0
+  m_Name: CubesExplosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &51561231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51561230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4943b7f449f1d6f4aacd21916683927b, type: 3}
+  m_Script: {fileID: 11500000, guid: ce10a16212c3e964e85e62f70aac87c8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cube
+  m_EditorClassIdentifier: Assembly-CSharp::CubesExplosion
+  _radius: 2
+  _force: 10
+--- !u!4 &51561232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51561230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &345521851
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +229,7 @@ GameObject:
   - component: {fileID: 358783920}
   - component: {fileID: 358783919}
   m_Layer: 0
-  m_Name: CubeHitCheck
+  m_Name: HitHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,6 +248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CubeHitCheck
   _raycaster: {fileID: 1270121142}
+  _cubesCreator: {fileID: 1664878191}
+  _cubesExplosion: {fileID: 51561231}
 --- !u!4 &358783920
 Transform:
   m_ObjectHideFlags: 0
@@ -549,17 +586,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
---- !u!114 &896961768 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
-  m_PrefabInstance: {fileID: 8410726216440821712}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4943b7f449f1d6f4aacd21916683927b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cube
 --- !u!1 &903976898
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,17 +639,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1080094037 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
-  m_PrefabInstance: {fileID: 1347647240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4943b7f449f1d6f4aacd21916683927b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cube
 --- !u!1 &1095213837
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +713,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Raycaster
   _inputReader: {fileID: 1095213838}
-  _camera: {fileID: 367931318}
 --- !u!4 &1270121143
 Transform:
   m_ObjectHideFlags: 0
@@ -853,13 +867,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ca9360b073019458a71042d9d1238e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CubesCreator
-  _cubePrefab: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
-  _startCubes:
-  - {fileID: 896961768}
-  - {fileID: 160974691}
-  - {fileID: 1080094037}
+  _prefab: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
   _minCount: 2
   _maxCount: 6
+  _cubeValuesAdjuster: {fileID: 1837868142}
 --- !u!4 &1664878192
 Transform:
   m_ObjectHideFlags: 0
@@ -867,6 +878,50 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664878190}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1837868141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837868143}
+  - component: {fileID: 1837868142}
+  m_Layer: 0
+  m_Name: CubeValuesAdjuster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1837868142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837868141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb54ba6078ecfa942b7d7155fc095382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CubeValuesAdjuster
+--- !u!4 &1837868143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837868141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1111,6 +1166,8 @@ SceneRoots:
   - {fileID: 1270121143}
   - {fileID: 358783920}
   - {fileID: 1664878192}
+  - {fileID: 51561232}
+  - {fileID: 1837868143}
   - {fileID: 2119606853}
   - {fileID: 8410726216440821712}
   - {fileID: 555748094}

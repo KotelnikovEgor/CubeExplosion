@@ -2,41 +2,32 @@ using UnityEngine;
 
 public class CubesCreator : MonoBehaviour
 {
-    [SerializeField] private Cube _cubePrefab;
+    [SerializeField] private Cube _prefab;
     [SerializeField] private int _minCount = 2;
     [SerializeField] private int _maxCount = 6;
-    [SerializeField] private CubesExplosion _cubesExplosion;
+    [SerializeField] private CubeValuesAdjuster _cubeValuesAdjuster;
 
-    private int _count;
+    private Cube[] _createdCubes;
     private float _splitChance = 100f;
     private readonly float _maxSplitChance = 100f;
     private readonly float _splitDivisor = 2f;
 
+    public Cube[] CrearedCubes => _createdCubes;
+
     public void Create(Transform transform)
     {
-        _count = GetRandomCount();
+        int count = GetRandomCount();
 
-        Cube[] createdCubes = new Cube[_count];
+        _createdCubes = new Cube[count];
 
-        if (_count == 0)
-            return;
-
-        for (int i = 0; i < _count; i++)
+        for (int i = 0; i < count; i++)
         {
-            Cube createdCube = Instantiate(_cubePrefab, transform.position, transform.rotation);
-            SetValues(createdCube, transform);
-            createdCubes[i] = createdCube;
+            Cube createdCube = Instantiate(_prefab, transform.position, transform.rotation);
+            _cubeValuesAdjuster.Adjust(createdCube, transform);
+            _createdCubes[i] = createdCube;
         }
 
         _splitChance /= _splitDivisor;
-        _cubesExplosion.BlowUp(createdCubes, transform.position);
-    }
-
-    private void SetValues(Cube cube, Transform destroyedTransform)
-    {
-        Vector3 cubeScale = destroyedTransform.localScale / 2;
-        cube.transform.localScale = cubeScale;
-        cube.GetComponent<Renderer>().material.color = GetRandomColor();
     }
 
     private int GetRandomCount()
@@ -45,10 +36,5 @@ public class CubesCreator : MonoBehaviour
             return 0;
 
         return Random.Range(_minCount, _maxCount + 1);
-    }
-
-    private Color GetRandomColor()
-    {
-        return Random.ColorHSV();
     }
 }

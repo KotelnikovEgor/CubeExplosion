@@ -9,7 +9,8 @@ public class CubesExplosion : MonoBehaviour
     {
         foreach (var cube in cubes)
         {
-            cube.GetComponent<Rigidbody>().AddExplosionForce(_force, position, _radius);
+            if (cube.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
+                rigidbody.AddExplosionForce(_force, position, _radius);
         }
     }
 }

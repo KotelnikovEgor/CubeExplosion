@@ -12,6 +12,11 @@ public class Raycaster : MonoBehaviour
         _inputReader.ButtonPressed += CreateRay;
     }
 
+    private void OnDisable()
+    {
+        _inputReader.ButtonPressed -= CreateRay;
+    }
+
     private void CreateRay(Ray ray)
     {
         if (Physics.Raycast(ray, out RaycastHit hit))
