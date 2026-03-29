@@ -586,6 +586,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
+--- !u!114 &736581668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
+  m_PrefabInstance: {fileID: 8410726216440821712}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4943b7f449f1d6f4aacd21916683927b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cube
 --- !u!1 &903976898
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +650,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1028703868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
+  m_PrefabInstance: {fileID: 555748094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4943b7f449f1d6f4aacd21916683927b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cube
 --- !u!1 &1095213837
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,6 +807,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
+--- !u!114 &1470879999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4580595084305841999, guid: c2b8499833e23934d939524e92b03cd8, type: 3}
+  m_PrefabInstance: {fileID: 1347647240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4943b7f449f1d6f4aacd21916683927b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cube
 --- !u!1 &1605951511
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +904,10 @@ MonoBehaviour:
   _minCount: 2
   _maxCount: 6
   _cubeValuesAdjuster: {fileID: 1837868142}
+  _firstCubes:
+  - {fileID: 736581668}
+  - {fileID: 1028703868}
+  - {fileID: 1470879999}
 --- !u!4 &1664878192
 Transform:
   m_ObjectHideFlags: 0

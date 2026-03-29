@@ -18,11 +18,11 @@ public class HitHandler : MonoBehaviour
 
     private void CheckHit(RaycastHit hit)
     {
-        if (hit.transform.TryGetComponent<Cube>(out Cube cube))
+        if (hit.transform.TryGetComponent(out Cube cube))
         {
-            _cubesCreator.Create(hit.transform);
-            _cubesExplosion.BlowUp(_cubesCreator.CrearedCubes, cube.transform.position);
-            Destroy(cube.gameObject);
+            Cube[] cubes = _cubesCreator.Create(cube);
+            _cubesExplosion.BlowUp(cubes, cube.transform.position);
+            cube.TriggerEvent();
         }
     }
 }
