@@ -3,26 +3,23 @@ using UnityEngine;
 public class HitHandler : MonoBehaviour
 {
     [SerializeField] private Raycaster _raycaster;
-    [SerializeField] private CubesCreator _cubesCreator;
-    [SerializeField] private CubesExplosion _cubesExplosion;
+    [SerializeField] private CubeHitActionHandler _cubeHitActionHandler;
 
     private void Start()
     {
-        _raycaster.RaycastHit += HitCube;
+        _raycaster.RaycastHit += ProcessHit;
     }
 
     private void OnDisable()
     {
-        _raycaster.RaycastHit -= HitCube;
+        _raycaster.RaycastHit -= ProcessHit;
     }
 
-    private void HitCube(RaycastHit hit)
+    private void ProcessHit(RaycastHit hit)
     {
         if (hit.transform.TryGetComponent(out Cube cube))
         {
-            Cube[] cubes = _cubesCreator.Create(cube);
-            _cubesExplosion.BlowUp(cubes, cube.transform.position);
-            _cubesCreator.DestroyCube(cube);
+            _cubeHitActionHandler.Process(cube);
         }
     }
 }

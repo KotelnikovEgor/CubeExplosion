@@ -12,10 +12,7 @@ public class CubesCreator : MonoBehaviour
 
     public Cube[] Create(Cube cube)
     {
-        int count = 0;
-
-        if (cube.CanSplit())
-            count = GenerateCount();
+        int count = GenerateCount();
 
         Cube[] createdCubes = new Cube[count];
 

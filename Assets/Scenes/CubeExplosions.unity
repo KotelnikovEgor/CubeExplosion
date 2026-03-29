@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce10a16212c3e964e85e62f70aac87c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CubesExplosion
-  _radius: 2
-  _force: 10
+  _initialRadius: 10
+  _initialForce: 300
 --- !u!4 &51561232
 Transform:
   m_ObjectHideFlags: 0
@@ -248,8 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CubeHitCheck
   _raycaster: {fileID: 1270121142}
-  _cubesCreator: {fileID: 1664878191}
-  _cubesExplosion: {fileID: 51561231}
+  _cubeHitActionHandler: {fileID: 1793889355}
 --- !u!4 &358783920
 Transform:
   m_ObjectHideFlags: 0
@@ -886,6 +885,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1793889354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793889356}
+  - component: {fileID: 1793889355}
+  m_Layer: 0
+  m_Name: CubeHitActionHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1793889355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793889354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be49f0619a63f214583300f528d16519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CubeHitActionHandler
+  _cubesCreator: {fileID: 1664878191}
+  _cubesExplosion: {fileID: 51561231}
+--- !u!4 &1793889356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793889354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1837868141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1210,7 @@ SceneRoots:
   - {fileID: 1095213839}
   - {fileID: 1270121143}
   - {fileID: 358783920}
+  - {fileID: 1793889356}
   - {fileID: 1664878192}
   - {fileID: 51561232}
   - {fileID: 1837868143}
