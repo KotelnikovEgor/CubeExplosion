@@ -8,21 +8,21 @@ public class HitHandler : MonoBehaviour
 
     private void Start()
     {
-        _raycaster.RaycastHit += CheckHit;
+        _raycaster.RaycastHit += HitCube;
     }
 
     private void OnDisable()
     {
-        _raycaster.RaycastHit -= CheckHit;
+        _raycaster.RaycastHit -= HitCube;
     }
 
-    private void CheckHit(RaycastHit hit)
+    private void HitCube(RaycastHit hit)
     {
         if (hit.transform.TryGetComponent(out Cube cube))
         {
             Cube[] cubes = _cubesCreator.Create(cube);
             _cubesExplosion.BlowUp(cubes, cube.transform.position);
-            cube.TriggerEvent();
+            _cubesCreator.DestroyCube(cube);
         }
     }
 }

@@ -5,16 +5,10 @@ public class CubesCreator : MonoBehaviour
     [SerializeField] private Cube _prefab;
     [SerializeField] private int _minCount = 2;
     [SerializeField] private int _maxCount = 6;
-    [SerializeField] private Colorizer _cubeValuesAdjuster;
-    [SerializeField] private Cube[] _firstCubes;
+    [SerializeField] private Colorizer _colorizer;
 
-    private Cube[] _createdCubes;
+    private readonly float _splitDivisor = 2f;
     private readonly float _scaleDivisor = 2f;
-
-    private void Start()
-    {
-        SubscribeFirstCubes();
-    }
 
     public Cube[] Create(Cube cube)
     {
@@ -23,25 +17,23 @@ public class CubesCreator : MonoBehaviour
         if (cube.CanSplit())
             count = GenerateCount();
 
-        _createdCubes = new Cube[count];
+        Cube[] createdCubes = new Cube[count];
 
         for (int i = 0; i < count; i++)
         {
             Cube createdCube = Instantiate(_prefab, cube.transform.position, cube.transform.rotation);
-            createdCube.OnClick += DestroyCube;
-            createdCube.SetSplitChance(cube);
-            SetScale(createdCube, cube.transform);
-            _cubeValuesAdjuster.Colorize(createdCube);
-            _createdCubes[i] = createdCube;
+            createdCube.SetSplitChance(cube.SplitChance / _splitDivisor);
+            SetScale(createdCube, cube.transform.localScale / _scaleDivisor);
+            _colorizer.Colorize(createdCube);
+            createdCubes[i] = createdCube;
         }
 
-        return _createdCubes;
+        return createdCubes;
     }
 
-    private void SubscribeFirstCubes()
+    public void DestroyCube(Cube cube)
     {
-        foreach (var cube in _firstCubes)
-            cube.OnClick += DestroyCube;
+        Destroy(cube.gameObject);
     }
 
     private int GenerateCount()
@@ -49,15 +41,8 @@ public class CubesCreator : MonoBehaviour
         return Random.Range(_minCount, _maxCount + 1);
     }
 
-    private void DestroyCube(Cube cube)
+    private void SetScale(Cube cube, Vector3 scale)
     {
-        cube.OnClick -= DestroyCube;
-        Destroy(cube.gameObject);
-    }
-
-    private void SetScale(Cube cube, Transform destroyedTransform)
-    {
-        Vector3 cubeScale = destroyedTransform.localScale / _scaleDivisor;
-        cube.transform.localScale = cubeScale;
+        cube.transform.localScale = scale;
     }
 }
